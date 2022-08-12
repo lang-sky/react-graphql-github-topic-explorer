@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
 const SearchForm = () => {
@@ -10,9 +10,13 @@ const SearchForm = () => {
     setSearchParams({ name });
   };
 
+  useEffect(() => {
+    setName(searchParams.get('name'));
+  }, [searchParams]);
+
   return (
-    <form onSubmit={handleSubmit}>
-      <label htmlFor="name">Name to Search</label>
+    <form className="search-form" onSubmit={handleSubmit}>
+      <label htmlFor="name">Name to Search: </label>
       <input type="text" name="name" value={name} onChange={(e) => setName(e.target.value)} />
       <button type="submit">Search</button>
     </form>

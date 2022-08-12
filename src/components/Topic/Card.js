@@ -3,10 +3,10 @@ import { Link } from 'react-router-dom';
 
 const Card = ({ name, stargazerCount }) => {
   return (
-    <div>
+    <div className="card">
       <h1>{name}</h1>
-      <p>{stargazerCount}</p>
-      <Link to={`topic?name=${name}`}>Search Related Topics</Link>
+      <p>Stargazer Count: {stargazerCount}</p>
+      <Link to={`/topic?name=${name}`}>Search Related Topics</Link>
     </div>
   );
 };

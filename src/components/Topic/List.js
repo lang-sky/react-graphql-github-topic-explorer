@@ -11,7 +11,7 @@ const List = ({ name }) => {
   if (error) return `Error! ${error.message}`;
 
   return (
-    <div>
+    <div className="list">
       {data.topic.relatedTopics.map(({ id, name, stargazerCount }) => (
         <Card key={id} name={name} stargazerCount={stargazerCount} />
       ))}
