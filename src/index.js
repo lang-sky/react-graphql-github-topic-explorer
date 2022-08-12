@@ -1,30 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { ApolloClient, createHttpLink, InMemoryCache, ApolloProvider, gql } from '@apollo/client';
-import { setContext } from '@apollo/client/link/context';
+import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { GRAPHQL_URI, GITHUB_API_TOKEN } from './config';
 
-const httpLink = createHttpLink({
-  uri: GRAPHQL_URI,
-});
-
-const authLink = setContext((_, { headers }) => {
-  // get the authentication token from local storage if it exists
-  const token = GITHUB_API_TOKEN;
-  // return the headers to the context so httpLink can read them
-  return {
-    headers: {
-      ...headers,
-      authorization: token ? `Bearer ${token}` : '',
-    },
-  };
-});
+const token = GITHUB_API_TOKEN;
 
 const client = new ApolloClient({
-  uri: authLink.concat(httpLink),
+  uri: GRAPHQL_URI,
+  headers: {
+    authorization: token ? `Bearer ${token}` : '',
+  },
   cache: new InMemoryCache(),
 });
 
